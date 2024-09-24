@@ -1,12 +1,11 @@
 ---
-title: "Deaths of People Experiencing Homelessness In Toronto"
-subtitle: "My subtitle if needed"
+title: "Analyzing Patterns of Hate Crimes: Insights from Toronto's Hate Crime Dataset"
 author: 
   - Sakura Hu
 thanks: "Code and data are available at: https://open.toronto.ca/dataset/deaths-of-people-experiencing-homelessness/."
 date: "2024-09-23"
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "This paper explores the issue of hate crimes in Toronto and their underlying causes, highlighting the urgent need for societal awareness and intervention. Utilizing a dataset of hate crime incidents, we employed statistical methods to analyze the counts attributed to various bias categories. Our findings reveal that the majority of hate crimes are directed toward Jewish, female, and Black individuals, with a concerning trend of increasing occurrences over the years. These results underscore the importance of understanding hate crimes to inform policies and initiatives aimed at fostering inclusivity and reducing discrimination in our communities."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -25,11 +24,13 @@ library(dplyr)
 
 # Introduction
 
-You can and should cross-reference sections and sub-sections. We use @citeR and @rohan.
+Hate crimes are criminal offenses directed at individuals or property, driven by bias, prejudice, or hatred based on factors such as race, ethnicity, language, religion, gender, sexual orientation, disability, or other similar characteristics. These crimes are a serious societal issue, as they target specific groups and reinforce divisions. In recent years, cities like Toronto have witnessed a rise in reported hate crimes, prompting a need to analyze the underlying causes and trends. Understanding the motivations behind hate crimes and identifying the most affected communities is critical for developing targeted prevention strategies and fostering a more inclusive society.
 
-The remainder of this paper is structured as follows. @sec-data....
+This paper utilizes data on hate crimes reported in Toronto to explore the causes behind these offenses. Specifically, it investigates the most frequent motivations for hate crimes, including race, ethnicity, religion, sexual orientation, and gender identity. By analyzing which demographic groups are most often victimized, this paper aims to shed light on patterns of bias in hate crimes and how these trends have evolved over time. The analysis reveals that Black, Jewish, and female individuals are disproportionately targeted, and the occurrence of hate crimes has been increasing each year.
 
+The importance of this study lies in its ability to inform policymakers, law enforcement, and the public about the prevalence and nature of hate crimes in Toronto. Addressing the root causes of these offenses is essential for reducing their occurrence and protecting vulnerable communities.
 
+The remainder of this paper is structured as follows: Section 2 discusses the data sources and variables, as well as the process of cleaning and preparing the data for analysis. Section 3 presents the results, including visualizations of key trends, while Section 4 provides a discussion of the findings. Finally, Section 5 includes appendices with additional details and supporting material.
 
 # Data {#sec-data}
 
