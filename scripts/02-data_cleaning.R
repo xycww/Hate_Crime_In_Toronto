@@ -7,38 +7,28 @@
 # Pre-requisites: [...UPDATE THIS...]
 # Any other information needed? [...UPDATE THIS...]
 
+#### Preamble ####
+# Purpose: Cleans the raw hate crime data recorded by observers
+# Author: Rohan Alexander
+# Date: 6 April 2023
+# Contact: rohan.alexander@utoronto.ca
+# License: MIT
+# Pre-requisites: R packages tidyverse, dplyr must be installed
+# Any other information needed? This script processes the hate crime dataset.
+
 #### Workspace setup ####
 library(tidyverse)
 
 #### Clean data ####
-raw_data <- read_csv("inputs/data/plane_data.csv")
+raw_data <- read_csv("data/raw_data/raw_data.csv")
 
-cleaned_data <-
-  raw_data |>
-  janitor::clean_names() |>
-  select(wing_width_mm, wing_length_mm, flying_time_sec_first_timer) |>
-  filter(wing_width_mm != "caw") |>
+# Replace "NO" with "None" in the specified columns
+cleaned_data <- raw_data %>%
   mutate(
-    flying_time_sec_first_timer = if_else(flying_time_sec_first_timer == "1,35",
-                                   "1.35",
-                                   flying_time_sec_first_timer)
-  ) |>
-  mutate(wing_width_mm = if_else(wing_width_mm == "490",
-                                 "49",
-                                 wing_width_mm)) |>
-  mutate(wing_width_mm = if_else(wing_width_mm == "6",
-                                 "60",
-                                 wing_width_mm)) |>
-  mutate(
-    wing_width_mm = as.numeric(wing_width_mm),
-    wing_length_mm = as.numeric(wing_length_mm),
-    flying_time_sec_first_timer = as.numeric(flying_time_sec_first_timer)
-  ) |>
-  rename(flying_time = flying_time_sec_first_timer,
-         width = wing_width_mm,
-         length = wing_length_mm
-         ) |> 
-  tidyr::drop_na()
+    AGE_BIAS = ifelse(AGE_BIAS == "NO", "None", AGE_BIAS),
+    MENTAL_OR_PHYSICAL_DISABILITY = ifelse(MENTAL_OR_PHYSICAL_DISABILITY == "NO", "None", MENTAL_OR_PHYSICAL_DISABILITY)
+  )
+
 
 #### Save data ####
-write_csv(cleaned_data, "outputs/data/analysis_data.csv")
+write_csv(cleaned_data, "data/analysis_data/analysis_data.csv")

@@ -1,11 +1,10 @@
 ---
-title: "My title"
+title: "Deaths of People Experiencing Homelessness In Toronto"
 subtitle: "My subtitle if needed"
 author: 
-  - First author
-  - Another author
-thanks: "Code and data are available at: LINK."
-date: today
+  - Sakura Hu
+thanks: "Code and data are available at: https://open.toronto.ca/dataset/deaths-of-people-experiencing-homelessness/."
+date: "2024-09-23"
 date-format: long
 abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
 format: pdf
@@ -19,7 +18,8 @@ bibliography: references.bib
 #| message: false
 
 library(tidyverse)
-library(palmerpenguins)
+library(ggplot2)
+library(dplyr)
 ```
 
 
@@ -36,17 +36,154 @@ The remainder of this paper is structured as follows. @sec-data....
 Some of our data is of penguins (@fig-bills), from @palmerpenguins.
 
 ```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
+#| label: fig-yearly-deaths
+#| fig-cap: Yearly Distribution of Deaths of People Experiencing Homelessness
 #| echo: false
 
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
+analyze_data <- read_csv("../data/raw_data/raw_data.csv")
+
+```
+
+```{r}
+# Reshape the data to long format and count occurrences for each bias
+bias_counts <- cleaned_data %>%
+  select(RACE_BIAS, ETHNICITY_BIAS, SEXUAL_ORIENTATION_BIAS, GENDER_BIAS, LANGUAGE_BIAS, RELIGION_BIAS, MENTAL_OR_PHYSICAL_DISABILITY) %>%
+  pivot_longer(cols = everything(), names_to = "Bias_Type", values_to = "Bias_Value") %>%
+  mutate(Value = ifelse(Bias_Value == "None", 0, 1)) %>%
+  group_by(Bias_Type) %>%
+  summarise(Count = sum(Value))
+
+# Create a bar chart
+ggplot(bias_counts, aes(x = reorder(Bias_Type, Count), y = Count, fill = Bias_Type)) +
+  geom_bar(stat = "identity") +
   theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
+  labs(x = "Bias Type", y = "Count of Occurrences", title = "Count of Occurrences Based on Different Bias Types") +
+  scale_fill_brewer(palette = "Set3") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
+
+# Filter out "None" from the RACE_BIAS column and count occurrences
+race_bias_counts <- cleaned_data %>%
+  filter(RACE_BIAS != "None") %>%
+  count(RACE_BIAS)
+
+# Create the bar chart
+ggplot(race_bias_counts, aes(x = reorder(RACE_BIAS, n), y = n)) +
+  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
+  theme_minimal() +
+  labs(x = "Race Bias Categories", y = "Number of Occurrences", 
+       title = "Occurrences of Hate Crimes by Race Bias") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+```{r}
+# Count occurrences by OCCURRENCE_YEAR without filtering
+year_counts <- cleaned_data %>%
+  count(OCCURRENCE_YEAR)
+
+# Create the bar chart
+ggplot(year_counts, aes(x = as.factor(OCCURRENCE_YEAR), y = n)) +
+  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
+  theme_minimal() +
+  labs(x = "Year of Occurrence", y = "Number of Occurrences", 
+       title = "Occurrences of Hate Crimes by Year") +
+  scale_x_discrete(drop = FALSE) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+```{r}
+# Filter out "None" and create a new column for Race Bias categorization
+race_counts <- cleaned_data %>%
+  filter(RACE_BIAS != "None") %>%
+  mutate(RACE_CATEGORY = ifelse(RACE_BIAS == "Black", "Black", "Other"))
+
+# Count occurrences by OCCURRENCE_YEAR and RACE_CATEGORY
+year_race_counts <- race_counts %>%
+  count(OCCURRENCE_YEAR, RACE_CATEGORY)
+
+# Create the stacked bar chart
+ggplot(year_race_counts, aes(x = as.factor(OCCURRENCE_YEAR), y = n, fill = RACE_CATEGORY)) +
+  geom_bar(stat = "identity", position = "stack", alpha = 0.8) +
+  scale_fill_manual(values = c("Black" = "steelblue", "Other" = "orange")) +
+  theme_minimal() +
+  labs(x = "Year of Occurrence", y = "Number of Occurrences", 
+       title = "Occurrences of Hate Crimes by Year and Race Bias") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+```{r}
+# Filter out "None" from the ETHNICITY_BIAS column and count occurrences
+ethnicity_bias_counts <- cleaned_data %>%
+  filter(ETHNICITY_BIAS != "None") %>%
+  count(ETHNICITY_BIAS)
+
+# Create the bar chart
+ggplot(ethnicity_bias_counts, aes(x = reorder(ETHNICITY_BIAS, n), y = n)) +
+  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
+  theme_minimal() +
+  labs(x = "ethnicity Bias Categories", y = "Number of Occurrences", 
+       title = "Occurrences of Hate Crimes by ethnicity Bias") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+```{r}
+# Filter out "None" from the LANGUAGE_BIAS column and count occurrences
+language_bias_counts <- cleaned_data %>%
+  filter(LANGUAGE_BIAS != "None") %>%
+  count(LANGUAGE_BIAS)
+
+# Create the bar chart
+ggplot(language_bias_counts, aes(x = reorder(LANGUAGE_BIAS, n), y = n)) +
+  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
+  theme_minimal() +
+  labs(x = "Language Bias Categories", y = "Number of Occurrences", 
+       title = "Occurrences of Hate Crimes by Language Bias") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+```{r}
+# Filter out "None" from the RELIGION_BIAS column and count occurrences
+religion_bias_counts <- cleaned_data %>%
+  filter(RELIGION_BIAS != "None") %>%
+  count(RELIGION_BIAS)
+
+# Create the bar chart
+ggplot(religion_bias_counts, aes(x = reorder(RELIGION_BIAS, n), y = n)) +
+  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
+  theme_minimal() +
+  labs(x = "Religion Bias Categories", y = "Number of Occurrences", 
+       title = "Occurrences of Hate Crimes by Language Bias") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
+# Filter out "None" from the SEXUAL_ORIENTATION_BIAS column and count occurrences
+sexual_ori_bias_counts <- cleaned_data %>%
+  filter(SEXUAL_ORIENTATION_BIAS != "None") %>%
+  count(SEXUAL_ORIENTATION_BIAS)
+
+# Create the bar chart
+ggplot(sexual_ori_bias_counts, aes(x = reorder(SEXUAL_ORIENTATION_BIAS, n), y = n)) +
+  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
+  theme_minimal() +
+  labs(x = "Sexual Orientation Bias Categories", y = "Number of Occurrences", 
+       title = "Occurrences of Hate Crimes by Sexual Orientation Bias") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+```{r}
+# Filter out "None" from the GENDER_BIAScolumn and count occurrences
+gender_bias_counts <- cleaned_data %>%
+  filter(GENDER_BIAS != "None") %>%
+  count(GENDER_BIAS)
+
+# Create the bar chart
+ggplot(gender_bias_counts, aes(x = reorder(GENDER_BIAS, n), y = n)) +
+  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
+  theme_minimal() +
+  labs(x = "Gender Bias Categories", y = "Number of Occurrences", 
+       title = "Occurrences of Hate Crimes by Gender Bias") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 Talk more about it.
