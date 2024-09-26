@@ -1,8 +1,9 @@
 ---
-title: "Analyzing Patterns of Hate Crimes: Insights from Toronto's Hate Crime Dataset"
+title: "Analyzing Patterns of Hate Crimes"
+subtitle: "WHAT DID YOU FIND?"
 author: 
   - Sakura Hu
-thanks: "Code and data are available at: https://open.toronto.ca/dataset/deaths-of-people-experiencing-homelessness/."
+thanks: "https://open.toronto.ca/dataset/hate-crimes-open-data/"
 date: "2024-09-23"
 date-format: long
 abstract: "This paper explores the issue of hate crimes in Toronto and their underlying causes, highlighting the urgent need for societal awareness and intervention. Utilizing a dataset of hate crime incidents, we employed statistical methods to analyze the counts attributed to various bias categories. Our findings reveal that the majority of hate crimes are directed toward Jewish, female, and Black individuals, with a concerning trend of increasing occurrences over the years. These results underscore the importance of understanding hate crimes to inform policies and initiatives aimed at fostering inclusivity and reducing discrimination in our communities."
@@ -19,6 +20,7 @@ bibliography: references.bib
 library(tidyverse)
 library(ggplot2)
 library(dplyr)
+library(knitr)
 ```
 
 
@@ -34,18 +36,36 @@ The remainder of this paper is structured as follows: Section 2 discusses the da
 
 # Data {#sec-data}
 
-Some of our data is of penguins (@fig-bills), from @palmerpenguins.
-
 ```{r}
-#| label: fig-yearly-deaths
-#| fig-cap: Yearly Distribution of Deaths of People Experiencing Homelessness
 #| echo: false
+#| warning: false
+#| message: false
 
-analyze_data <- read_csv("../data/raw_data/raw_data.csv")
+cleaned_data <- read_csv("../data/analysis_data/analysis_data.csv")
+# Summarize the counts of occurrences for different bias categories by year
+bias_summary_by_year <- cleaned_data %>%
+  group_by(OCCURRENCE_YEAR) %>%
+  summarize(
+    race_bias_count = sum(RACE_BIAS != "None"),
+    ethnicity_bias_count = sum(ETHNICITY_BIAS != "None"),
+    religion_bias_count = sum(RELIGION_BIAS != "None"),
+    gender_bias_count = sum(GENDER_BIAS != "None"),
+    sexual_orientation_bias_count = sum(SEXUAL_ORIENTATION_BIAS != "None"),
+    disability_bias_count = sum(MENTAL_OR_PHYSICAL_DISABILITY != "None")
+  )
 
+# Display the summary
+bias_summary_by_year %>% 
+  kable(
+    col.names = c("Year", "Race", "Ethnicity", "Religion", "Gender", "Sexual_Orientation", "Disability"),
+    # digits = 1
+  )
 ```
 
 ```{r}
+#| label: fig-occurence-by-bias
+#| fig-cap: Count of Occurrences Based on Different Bias Types
+#| echo: false
 # Reshape the data to long format and count occurrences for each bias
 bias_counts <- cleaned_data %>%
   select(RACE_BIAS, ETHNICITY_BIAS, SEXUAL_ORIENTATION_BIAS, GENDER_BIAS, LANGUAGE_BIAS, RELIGION_BIAS, MENTAL_OR_PHYSICAL_DISABILITY) %>%
@@ -58,13 +78,76 @@ bias_counts <- cleaned_data %>%
 ggplot(bias_counts, aes(x = reorder(Bias_Type, Count), y = Count, fill = Bias_Type)) +
   geom_bar(stat = "identity") +
   theme_minimal() +
-  labs(x = "Bias Type", y = "Count of Occurrences", title = "Count of Occurrences Based on Different Bias Types") +
+  labs(x = "Bias Type", y = "Count of Occurrences") +
   scale_fill_brewer(palette = "Set3") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+```{r}
+#| label: fig-yearly-occurrence
+#| fig-cap: Occurrences of Hate Crimes by Year
+#| echo: false
+# Count occurrences by OCCURRENCE_YEAR without filtering
+year_counts <- cleaned_data %>%
+  count(OCCURRENCE_YEAR)
+
+# Create the bar chart
+ggplot(year_counts, aes(x = as.factor(OCCURRENCE_YEAR), y = n)) +
+  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
+  theme_minimal() +
+  labs(x = "Year of Occurrence", y = "Number of Occurrences") +
+  scale_x_discrete(drop = FALSE) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r}
+#| label: fig-religion-bias
+#| fig-cap: Occurrences of Hate Crimes by Religion Bias
+#| echo: false
+# Filter out "None" from the RELIGION_BIAS column and count occurrences
+religion_bias_counts <- cleaned_data %>%
+  filter(RELIGION_BIAS != "None") %>%
+  count(RELIGION_BIAS)
 
+# Create the bar chart
+ggplot(religion_bias_counts, aes(x = reorder(RELIGION_BIAS, n), y = n)) +
+  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
+  theme_minimal() +
+  labs(x = "Religion Bias Categories", y = "Number of Occurrences") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
+#| label: fig-Jewish-bias
+#| fig-cap: Occurrences of Hate Crimes by Year and Race Bias
+#| echo: false
+# Filter out "None" and create a new column for Race Bias categorization
+race_counts <- cleaned_data %>%
+  filter(RELIGION_BIAS != "None") %>%
+  mutate(RELIGION_CATEGORY = ifelse(RELIGION_BIAS == "Jewish", "Jewish", "Other"))
+
+# Count occurrences by OCCURRENCE_YEAR and RACE_CATEGORY
+year_religion_counts <- race_counts %>%
+  count(OCCURRENCE_YEAR, RELIGION_CATEGORY)
+
+# Calculate percentage for each category within each year
+year_religion_counts <- year_religion_counts %>%
+  group_by(OCCURRENCE_YEAR) %>%
+  mutate(percentage = n / sum(n) * 100)
+
+# Create the stacked bar chart
+ggplot(year_religion_counts, aes(x = as.factor(OCCURRENCE_YEAR), y = percentage, fill = RELIGION_CATEGORY)) +
+  geom_bar(stat = "identity", position = "stack", alpha = 0.8) +
+  scale_fill_manual(values = c("Jewish" = "steelblue", "Other" = "orange")) +
+  theme_minimal() +
+  labs(x = "Year of Occurrence", y = "Number of Occurrences") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  geom_text(aes(label = scales::percent(percentage / 100)), 
+            position = position_stack(vjust = 0.5), 
+            color = "white", size = 4)  # Adjust size and color as needed
+```
+
+```{r}
+#| echo: false
 # Filter out "None" from the RACE_BIAS column and count occurrences
 race_bias_counts <- cleaned_data %>%
   filter(RACE_BIAS != "None") %>%
@@ -77,23 +160,10 @@ ggplot(race_bias_counts, aes(x = reorder(RACE_BIAS, n), y = n)) +
   labs(x = "Race Bias Categories", y = "Number of Occurrences", 
        title = "Occurrences of Hate Crimes by Race Bias") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
 ```
-```{r}
-# Count occurrences by OCCURRENCE_YEAR without filtering
-year_counts <- cleaned_data %>%
-  count(OCCURRENCE_YEAR)
 
-# Create the bar chart
-ggplot(year_counts, aes(x = as.factor(OCCURRENCE_YEAR), y = n)) +
-  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
-  theme_minimal() +
-  labs(x = "Year of Occurrence", y = "Number of Occurrences", 
-       title = "Occurrences of Hate Crimes by Year") +
-  scale_x_discrete(drop = FALSE) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
 ```{r}
+#| echo: false
 # Filter out "None" and create a new column for Race Bias categorization
 race_counts <- cleaned_data %>%
   filter(RACE_BIAS != "None") %>%
@@ -103,175 +173,36 @@ race_counts <- cleaned_data %>%
 year_race_counts <- race_counts %>%
   count(OCCURRENCE_YEAR, RACE_CATEGORY)
 
-# Create the stacked bar chart
-ggplot(year_race_counts, aes(x = as.factor(OCCURRENCE_YEAR), y = n, fill = RACE_CATEGORY)) +
+# Calculate percentage for each category within each year
+year_race_counts <- year_race_counts %>%
+  group_by(OCCURRENCE_YEAR) %>%
+  mutate(percentage = n / sum(n) * 100)
+
+# Create the stacked bar chart with percentage labels
+ggplot(year_race_counts, aes(x = as.factor(OCCURRENCE_YEAR), y = percentage, fill = RACE_CATEGORY)) +
   geom_bar(stat = "identity", position = "stack", alpha = 0.8) +
   scale_fill_manual(values = c("Black" = "steelblue", "Other" = "orange")) +
   theme_minimal() +
-  labs(x = "Year of Occurrence", y = "Number of Occurrences", 
-       title = "Occurrences of Hate Crimes by Year and Race Bias") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-```
-```{r}
-# Filter out "None" from the ETHNICITY_BIAS column and count occurrences
-ethnicity_bias_counts <- cleaned_data %>%
-  filter(ETHNICITY_BIAS != "None") %>%
-  count(ETHNICITY_BIAS)
-
-# Create the bar chart
-ggplot(ethnicity_bias_counts, aes(x = reorder(ETHNICITY_BIAS, n), y = n)) +
-  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
-  theme_minimal() +
-  labs(x = "ethnicity Bias Categories", y = "Number of Occurrences", 
-       title = "Occurrences of Hate Crimes by ethnicity Bias") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-```
-```{r}
-# Filter out "None" from the LANGUAGE_BIAS column and count occurrences
-language_bias_counts <- cleaned_data %>%
-  filter(LANGUAGE_BIAS != "None") %>%
-  count(LANGUAGE_BIAS)
-
-# Create the bar chart
-ggplot(language_bias_counts, aes(x = reorder(LANGUAGE_BIAS, n), y = n)) +
-  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
-  theme_minimal() +
-  labs(x = "Language Bias Categories", y = "Number of Occurrences", 
-       title = "Occurrences of Hate Crimes by Language Bias") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
-```{r}
-# Filter out "None" from the RELIGION_BIAS column and count occurrences
-religion_bias_counts <- cleaned_data %>%
-  filter(RELIGION_BIAS != "None") %>%
-  count(RELIGION_BIAS)
-
-# Create the bar chart
-ggplot(religion_bias_counts, aes(x = reorder(RELIGION_BIAS, n), y = n)) +
-  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
-  theme_minimal() +
-  labs(x = "Religion Bias Categories", y = "Number of Occurrences", 
-       title = "Occurrences of Hate Crimes by Language Bias") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
-
-```{r}
-# Filter out "None" from the SEXUAL_ORIENTATION_BIAS column and count occurrences
-sexual_ori_bias_counts <- cleaned_data %>%
-  filter(SEXUAL_ORIENTATION_BIAS != "None") %>%
-  count(SEXUAL_ORIENTATION_BIAS)
-
-# Create the bar chart
-ggplot(sexual_ori_bias_counts, aes(x = reorder(SEXUAL_ORIENTATION_BIAS, n), y = n)) +
-  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
-  theme_minimal() +
-  labs(x = "Sexual Orientation Bias Categories", y = "Number of Occurrences", 
-       title = "Occurrences of Hate Crimes by Sexual Orientation Bias") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-```
-```{r}
-# Filter out "None" from the GENDER_BIAScolumn and count occurrences
-gender_bias_counts <- cleaned_data %>%
-  filter(GENDER_BIAS != "None") %>%
-  count(GENDER_BIAS)
-
-# Create the bar chart
-ggplot(gender_bias_counts, aes(x = reorder(GENDER_BIAS, n), y = n)) +
-  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
-  theme_minimal() +
-  labs(x = "Gender Bias Categories", y = "Number of Occurrences", 
-       title = "Occurrences of Hate Crimes by Gender Bias") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  labs(x = "Year of Occurrence", y = "Percentage of Occurrences", 
+       title = "Percentage of Hate Crimes by Year and Race Bias") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  geom_text(aes(label = scales::percent(percentage / 100)), 
+            position = position_stack(vjust = 0.5), 
+            color = "white", size = 4)  # Adjust size and color as needed
 ```
 
 Talk more about it.
 
 And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
 
-```{r}
-#| label: fig-planes
-#| fig-cap: Relationship between wing length and width
-#| echo: false
-#| warning: false
-#| message: false
-
-analysis_data <- read_csv(here::here("data/analysis_data/analysis_data.csv"))
-
-analysis_data |> 
-  ggplot(aes(x = width, y = length)) +
-  geom_point(alpha = 0.8) +
-  theme_minimal() +
-  labs(x = "Wing width (mm)",
-       y = "Wing length (mm)")
-```
 
 Talk way more about it. 
-
-
-
-# Model
-
-The goal of our modelling strategy is twofold. Firstly,...
-
-Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix -@sec-model-details].
-
-## Model set-up
-
-Define $y_i$ as the number of seconds that the plane remained aloft. Then $\beta_i$ is the wing width and $\gamma_i$ is the wing length, both measured in millimeters.  
-
-\begin{align} 
-y_i|\mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\
-\mu_i &= \alpha + \beta_i + \gamma_i\\
-\alpha &\sim \mbox{Normal}(0, 2.5) \\
-\beta &\sim \mbox{Normal}(0, 2.5) \\
-\gamma &\sim \mbox{Normal}(0, 2.5) \\
-\sigma &\sim \mbox{Exponential}(1)
-\end{align}
-
-We run the model in R [@citeR] using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`.
-
-
-### Model justification
-
-We expect a positive relationship between the size of the wings and time spent aloft. In particular...
-
-We can use maths by including latex between dollar signs, for instance $\theta$.
-
 
 # Results
 
 Our results are summarized in @tbl-modelresults.
 
-```{r}
-#| echo: false
-#| eval: true
-#| warning: false
-#| message: false
 
-library(rstanarm)
-
-first_model <-
-  readRDS(file = here::here("models/first_model.rds"))
-```
-
-```{r}
-#| echo: false
-#| eval: true
-#| label: tbl-modelresults
-#| tbl-cap: "Explanatory models of flight time based on wing width and wing length"
-#| warning: false
-
-modelsummary::modelsummary(
-  list(
-    "First model" = first_model
-  ),
-  statistic = "mad",
-  fmt = 2
-)
-```
 
 
 
@@ -297,57 +228,7 @@ Weaknesses and next steps should also be included.
 # Appendix {-}
 
 
-# Additional data details
 
-# Model details {#sec-model-details}
-
-## Posterior predictive check
-
-In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check. This shows...
-
-In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. This shows... 
-
-```{r}
-#| eval: true
-#| echo: false
-#| message: false
-#| warning: false
-#| label: fig-ppcheckandposteriorvsprior
-#| layout-ncol: 2
-#| fig-cap: "Examining how the model fits, and is affected by, the data"
-#| fig-subcap: ["Posterior prediction check", "Comparing the posterior with the prior"]
-
-pp_check(first_model) +
-  theme_classic() +
-  theme(legend.position = "bottom")
-
-posterior_vs_prior(first_model) +
-  theme_minimal() +
-  scale_color_brewer(palette = "Set1") +
-  theme(legend.position = "bottom") +
-  coord_flip()
-```
-
-## Diagnostics
-
-@fig-stanareyouokay-1 is a trace plot. It shows... This suggests...
-
-@fig-stanareyouokay-2 is a Rhat plot. It shows... This suggests...
-
-```{r}
-#| echo: false
-#| eval: true
-#| message: false
-#| warning: false
-#| label: fig-stanareyouokay
-#| fig-cap: "Checking the convergence of the MCMC algorithm"
-#| fig-subcap: ["Trace plot", "Rhat plot"]
-#| layout-ncol: 2
-
-plot(first_model, "trace")
-
-plot(first_model, "rhat")
-```
 
 
 

@@ -16,19 +16,23 @@ library(tidyverse)
 set.seed(1009201917)
 
 # Define the number of records to simulate
-number_of_records <- 84
+n <- 100
 
-# Define the simulation parameters
-years <- seq(2017, 2023)  # Years for the simulation
-months <- month.name  # Month names from January to December
+# Simulating OCCURRENCE_YEAR (e.g., from 2018 to 2023)
+occurrence_year <- sample(2018:2023, n, replace = TRUE)
 
-# Create the simulated data
-simulated_data <- tibble(
-  id = 1:number_of_records,  # Unique row identifier
-  Year_of_death = sample(years, number_of_records, replace = TRUE),  # Randomly sample years
-  Month_of_death = sample(months, number_of_records, replace = TRUE),  # Randomly sample months
-  Count = rpois(number_of_records, lambda = 13)  # Randomly generate counts using Poisson distribution
-)
+simulated_data <- 
+  tibble(
+    OCCURRENCE_YEAR = occurrence_year,
+    RACE_BIAS = sample(unique(cleaned_data$RACE_BIAS), n, replace = TRUE),
+    ETHNICITY_BIAS = sample(unique(cleaned_data$ETHNICITY_BIAS), n, replace = TRUE),
+    RELIGION_BIAS = sample(unique(cleaned_data$RELIGION_BIAS), n, replace = TRUE),
+    SEXUAL_ORIENTATION_BIAS = sample(unique(cleaned_data$SEXUAL_ORIENTATION_BIAS), n, replace = TRUE),
+    GENDER_BIAS = sample(unique(cleaned_data$GENDER_BIAS), n, replace = TRUE)
+  )
+
+# Check the first few rows of the simulated data
+head(simulated_data)
 
 
 #### Write_csv
