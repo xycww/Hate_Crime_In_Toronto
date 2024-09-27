@@ -1,7 +1,7 @@
 #### Preamble ####
 # Purpose: Sanity check of the data
 # Author: Sakura Hu
-# Date: 20 September 2024
+# Date: 27 September 2024
 # Contact: sakura.hu@mail.utoronto.ca
 # License: MIT
 # Pre-requisites: Need to have simulated data
@@ -15,12 +15,15 @@ library(tidyverse)
 #### Test data ####
 simulated_data <- read_csv("data/raw_data/simulated.csv")
 
-# Test for negative numbers
-simulated_data$Count |> min() <= 0
+# 1. Check for missing values (NAs) in key columns
+na_checks <- sapply(simulated_data, function(x) sum(is.na(x)))
+print("Number of NAs in each column:")
+print(na_checks)
 
-# Test for NAs
-all(is.na(simulated_data$Count))
+# 2. Test that all OCCURRENCE_YEAR values are between 2018 and 2023
+valid_years <- all(simulated_data$OCCURRENCE_YEAR %in% 2018:2023)
+print(paste("All OCCURRENCE_YEAR values are valid (2018 to 2023):", valid_years))
 
-# Test for unqiue id
-
-# Test for valid
+# 3. Check for duplicate rows
+duplicate_rows <- any(duplicated(simulated_data))
+print(paste("There are duplicate rows in the dataset:", duplicate_rows))

@@ -1,101 +1,101 @@
-OCCURRENCE_YEAR,RACE_BIAS,ETHNICITY_BIAS,LANGUAGE_BIAS,RELIGION_BIAS,SEXUAL_ORIENTATION_BIAS,GENDER_BIAS
-2022,"Black, Latino",Palestinian,Spanish,Hindu,None,Transgender
-2023,"Black, South Asian",Latino,None,Hindu,2SLGBTQ+,Transgender
-2023,Middle Eastern,Chinese,None,Catholic,"Lesbian, 2SLGBTQ+",Transgender
-2022,"Black, White",Mexican,Hindi,Hindu,Lesbian,Transgender Woman (Identifies As Woman)
-2020,Other race not mentioned,Russian,Tamil,Jewish,"Lesbian, 2SLGBTQ+","Transgender, Transgender Woman (Identifies As Woman)"
-2023,Black,Pakistani,Hindi,Catholic,Gay,Transgender Man (Identifies As Man)
-2022,Black,Other Ethnicity not mentioned,None,Muslim,2SLGBTQ+,Transgender Woman (Identifies As Woman)
-2019,"Black, White",Chinese,Spanish,Christian Orthodox,2SLGBTQ+,Transgender
-2020,"Black, South Asian",Mexican,None,Anglican,Gay,"Transgender, Transgender Woman (Identifies As Woman)"
-2020,"Black, White",Pakistani,Hindi,Christian Orthodox,None,Woman
-2019,Black,"Chinese, Arab",Tamil,Jewish,"Lesbian, 2SLGBTQ+",Transgender
-2022,None,Filipino,Spanish,Christian Orthodox,"Lesbian, 2SLGBTQ+","Transgender, Transgender Woman (Identifies As Woman)"
-2019,Other race not mentioned,Japanese,Tamil,Catholic,None,Woman
-2018,"Black, Indigenous",Iranian,None,Christian Orthodox,Lesbian,Woman
-2022,"Black, Latino",Other Ethnicity not mentioned,Spanish,Sikh,Lesbian,Transgender
-2018,"Black, South Asian",Mexican,Hindi,Other Christian Religion,Lesbian,Woman
-2022,Middle Eastern,Indian,None,Anglican,"Lesbian, 2SLGBTQ+",None
-2019,Black,None,Tamil,Anglican,"Lesbian, 2SLGBTQ+",Transgender Man (Identifies As Man)
-2020,Black,Pakistani,Hindi,Hindu,None,Woman
-2021,Latino,Pakistani,Tamil,"Jewish, Muslim","Lesbian, 2SLGBTQ+","Transgender, Transgender Woman (Identifies As Woman)"
-2021,Indigenous,None,Spanish,"Jewish, Muslim",Lesbian,Transgender
-2019,"Black, Indigenous",Chinese,Hindi,"Christian Orthodox, Jewish",None,Transgender
-2023,South Asian,Indian,Hindi,"Jewish, Muslim",None,Woman
-2020,South Asian,Russian,Tamil,Hindu,Gay,None
-2023,Latino,None,None,Jewish,Lesbian,Transgender
-2022,"East/Southeast Asian, South Asian, Black",Chinese,Spanish,Muslim,"Lesbian, 2SLGBTQ+","Transgender, Transgender Woman (Identifies As Woman)"
-2018,"Black, South Asian",Other Ethnicity not mentioned,None,Sikh,"Lesbian, 2SLGBTQ+","Transgender, Transgender Woman (Identifies As Woman)"
-2022,South Asian,Latino,Tamil,"Christian Orthodox, Jewish","Lesbian, 2SLGBTQ+",Transgender
-2018,Black,Mexican,Tamil,"Jewish, Muslim",Gay,"Transgender, Transgender Woman (Identifies As Woman)"
-2019,None,Iranian,Hindi,Other Christian Religion,None,Transgender Man (Identifies As Man)
-2022,"Black, Indigenous",Korean,None,Jewish,Lesbian,None
-2019,Other race not mentioned,African,None,Christian Orthodox,None,None
-2019,Indigenous,Mexican,Tamil,Christian Orthodox,Lesbian,Transgender Woman (Identifies As Woman)
-2023,"Black, White",Sri Lankan,Spanish,Hindu,2SLGBTQ+,"Transgender, Transgender Woman (Identifies As Woman)"
-2023,White,Sri Lankan,Tamil,"Christian Orthodox, Jewish",Gay,Transgender
-2021,None,Other Ethnicity not mentioned,Spanish,"Christian Orthodox, Jewish",None,Woman
-2018,Other race not mentioned,Mexican,Hindi,Muslim,None,Transgender Woman (Identifies As Woman)
-2019,"Black, Latino",Russian,Spanish,Other Christian Religion,Gay,Transgender Man (Identifies As Man)
-2019,"Black, Indigenous",Afghan,None,Jewish,Gay,Woman
-2021,East/Southeast Asian,Latino,None,Christian Orthodox,Lesbian,Transgender
-2022,East/Southeast Asian,Palestinian,Tamil,Muslim,"Lesbian, 2SLGBTQ+",Transgender Man (Identifies As Man)
-2019,Indigenous,Israeli,Tamil,Christian Orthodox,None,Woman
-2019,"Black, Indigenous",Pakistani,Tamil,Other Christian Religion,2SLGBTQ+,Transgender
-2022,White,Palestinian,Hindi,None,Gay,None
-2020,None,Israeli,Spanish,None,Gay,"Transgender, Transgender Woman (Identifies As Woman)"
-2023,East/Southeast Asian,Palestinian,Spanish,Jewish,None,Transgender Woman (Identifies As Woman)
-2021,"Black, East/Southeast Asian",Japanese,None,Jewish,"Lesbian, 2SLGBTQ+",Woman
-2023,Middle Eastern,Other Ethnicity not mentioned,None,Hindu,None,"Transgender, Transgender Woman (Identifies As Woman)"
-2022,Indigenous,"Indian, Filipino",Hindi,Other Christian Religion,Gay,Transgender Woman (Identifies As Woman)
-2018,Black,Arab,Tamil,"Jewish, Muslim",Lesbian,Transgender Man (Identifies As Man)
-2018,East/Southeast Asian,Ukrainian,Spanish,Other Christian Religion,Lesbian,Transgender Man (Identifies As Man)
-2022,"East/Southeast Asian, South Asian, Black",African,None,"Jewish, Muslim",Gay,Transgender Woman (Identifies As Woman)
-2020,East/Southeast Asian,Somali,Hindi,Hindu,"Lesbian, 2SLGBTQ+",Transgender
-2023,"White, East/Southeast Asian","Indian, Filipino",Tamil,Catholic,None,Transgender
-2021,"Black, Indigenous",Palestinian,None,Other Christian Religion,None,Woman
-2020,"Black, South Asian",Indian,None,Christian Orthodox,"Lesbian, 2SLGBTQ+",Transgender Man (Identifies As Man)
-2023,Indigenous,Israeli,Hindi,Anglican,"Lesbian, 2SLGBTQ+",None
-2021,"Black, South Asian",Filipino,Hindi,Christian Orthodox,Gay,Transgender Woman (Identifies As Woman)
-2019,South Asian,Chinese,Tamil,Other Christian Religion,Lesbian,Transgender
-2018,East/Southeast Asian,Indian,Hindi,Christian Orthodox,None,Transgender Man (Identifies As Man)
-2018,None,Indian,None,Sikh,Lesbian,"Transgender, Transgender Woman (Identifies As Woman)"
-2018,White,Korean,None,Muslim,"Lesbian, 2SLGBTQ+",None
-2020,None,Iranian,Tamil,Muslim,2SLGBTQ+,Transgender
-2018,"Black, East/Southeast Asian",Indian,Spanish,None,2SLGBTQ+,Woman
-2022,South Asian,Filipino,Tamil,Sikh,2SLGBTQ+,None
-2021,"Indigenous, East/Southeast Asian",Mexican,Tamil,"Christian Orthodox, Jewish","Lesbian, 2SLGBTQ+",Transgender
-2023,Black,Ukrainian,None,Muslim,Gay,Transgender
-2018,None,Mexican,Spanish,Jewish,None,"Transgender, Transgender Woman (Identifies As Woman)"
-2018,"White, East/Southeast Asian",African,Spanish,Hindu,Lesbian,Transgender Woman (Identifies As Woman)
-2021,"Black, Indigenous",Latino,Tamil,"Jewish, Muslim","Lesbian, 2SLGBTQ+",Transgender Woman (Identifies As Woman)
-2023,Other race not mentioned,Japanese,Spanish,"Jewish, Muslim",Gay,Transgender
-2021,Other race not mentioned,Russian,None,"Christian Orthodox, Jewish",2SLGBTQ+,Woman
-2019,"Black, South Asian","Chinese, Arab",None,"Christian Orthodox, Jewish",Lesbian,"Transgender, Transgender Woman (Identifies As Woman)"
-2019,Indigenous,"Chinese, Arab",None,Hindu,Lesbian,None
-2022,East/Southeast Asian,Korean,None,Catholic,Lesbian,Transgender
-2018,Latino,Chinese,Hindi,Sikh,Gay,Transgender
-2023,"White, East/Southeast Asian","Chinese, Arab",Spanish,Jewish,Lesbian,None
-2018,East/Southeast Asian,None,Spanish,None,None,Transgender Woman (Identifies As Woman)
-2020,Black,Indian,Spanish,Christian Orthodox,"Lesbian, 2SLGBTQ+","Transgender, Transgender Woman (Identifies As Woman)"
-2023,"Indigenous, East/Southeast Asian",Latino,Hindi,"Christian Orthodox, Jewish",None,Woman
-2022,Middle Eastern,Other Ethnicity not mentioned,Tamil,Hindu,Gay,None
-2020,"Black, White",Somali,None,"Jewish, Muslim",None,Woman
-2018,"Black, White",Russian,Hindi,Christian Orthodox,2SLGBTQ+,Transgender Man (Identifies As Man)
-2022,Middle Eastern,"Indian, Filipino",Hindi,Muslim,None,Transgender
-2023,Black,Sri Lankan,Spanish,Other Christian Religion,"Lesbian, 2SLGBTQ+",Transgender Man (Identifies As Man)
-2020,"Black, Indigenous",Arab,None,"Christian Orthodox, Jewish",None,Transgender Woman (Identifies As Woman)
-2019,None,Korean,Hindi,Anglican,"Lesbian, 2SLGBTQ+",Transgender Man (Identifies As Man)
-2018,South Asian,Iranian,Tamil,Catholic,None,Transgender Man (Identifies As Man)
-2019,None,Afghan,Spanish,Christian Orthodox,Gay,None
-2023,"Black, White",Somali,Tamil,Catholic,None,Transgender Man (Identifies As Man)
-2018,"Black, East/Southeast Asian",Iranian,Hindi,Catholic,"Lesbian, 2SLGBTQ+",Woman
-2022,"Black, Indigenous",Chinese,Tamil,Muslim,None,None
-2019,"White, East/Southeast Asian","Indian, Filipino",None,"Christian Orthodox, Jewish",Lesbian,Transgender Man (Identifies As Man)
-2019,Other race not mentioned,Somali,Spanish,None,2SLGBTQ+,Transgender
-2023,East/Southeast Asian,Palestinian,None,Sikh,Lesbian,Transgender Man (Identifies As Man)
-2021,"Black, White",Latino,None,Christian Orthodox,None,Transgender Man (Identifies As Man)
-2020,White,Japanese,Tamil,Christian Orthodox,Gay,Transgender Woman (Identifies As Woman)
-2023,"Indigenous, East/Southeast Asian",Mexican,Spanish,Sikh,None,None
-2019,South Asian,Mexican,None,Jewish,"Lesbian, 2SLGBTQ+",Transgender Man (Identifies As Man)
-2023,"Black, Latino",Israeli,None,Sikh,2SLGBTQ+,"Transgender, Transgender Woman (Identifies As Woman)"
+OCCURRENCE_YEAR,RACE_BIAS,ETHNICITY_BIAS,RELIGION_BIAS,SEXUAL_ORIENTATION_BIAS,GENDER_BIAS,LANGUAGE_BIAS,MENTAL_OR_PHYSICAL_DISABILITY,LOCATION_TYPE
+2022,None,Chinese,None,Gay,None,None,YES,"House (Townhouse, Retirement Home, Garage, Vehicle, Cottage)"
+2023,None,None,Catholic,None,None,None,None,Religious Place of Worship/Cultural Centre
+2023,None,Pakistani,None,Lesbian,None,None,YES,Government Building
+2022,Black,None,Other Christian Religion,2SLGBTQ+,None,None,None,Streets/Roadways/Highway
+2020,None,None,Hindu,None,None,None,None,Other Commercial / Corporate Places
+2023,None,None,Hindu,None,None,None,None,"House (Townhouse, Retirement Home, Garage, Vehicle, Cottage)"
+2022,None,Japanese,"Christian Orthodox, Jewish",2SLGBTQ+,None,None,None,Public Transportation
+2019,None,None,Jewish,None,Woman,None,YES,Other Commercial / Corporate Places
+2020,Middle Eastern,African,Catholic,None,Transgender Man (Identifies As Man),None,None,"Government Building (Courthouse, Museums, Parliament Building, etc.)"
+2020,None,None,Catholic,Gay,None,None,None,Government Building
+2019,None,None,Other Christian Religion,None,None,None,None,"House (Townhouse, Retirement Home, Garage, Vehicle, Cottage)"
+2022,White,"Chinese, Arab",Jewish,2SLGBTQ+,None,None,None,Business/Retail
+2019,South Asian,Korean,Muslim,Lesbian,None,None,None,"House (Townhouse, Retirement Home, Garage, Vehicle, Cottage)"
+2018,None,None,"Christian Orthodox, Jewish",None,None,None,YES,NA
+2022,Black,None,Muslim,None,None,None,YES,"Government Building (Courthouse, Museums, Parliament Building, etc.)"
+2018,East/Southeast Asian,None,Hindu,2SLGBTQ+,None,None,YES,Streets/Roadways/Highway
+2022,Black,None,Jewish,Gay,None,None,None,"Educational Institution (Universities, Colleges, Schools, etc.)"
+2019,None,None,Muslim,None,None,None,None,"Apartment Building (Condo, Retirement Buidling, etc.)"
+2020,White,None,Anglican,None,None,None,YES,NA
+2021,None,None,Christian Orthodox,Gay,None,None,None,"House (Townhouse, Retirement Home, Garage, Vehicle, Cottage)"
+2021,South Asian,None,Other Christian Religion,Lesbian,Transgender Man (Identifies As Man),None,None,"Apartment Building (Condo, Retirement Buidling, etc.)"
+2019,None,None,None,"Lesbian, 2SLGBTQ+",Woman,None,None,Non-Commercial/Non for Profit
+2023,None,Sri Lankan,None,"Lesbian, 2SLGBTQ+",None,None,None,"Medical Facility (Hospitals, Long-term Care, etc.)"
+2020,None,None,Christian Orthodox,None,Transgender,None,None,Business/Retail
+2023,White,African,None,None,None,None,None,"Government Building (Courthouse, Museums, Parliament Building, etc.)"
+2022,Middle Eastern,None,Other Christian Religion,Gay,"Transgender, Transgender Woman (Identifies As Woman)",None,None,"Medical Facility (Hospitals, Long-term Care, etc.)"
+2018,None,African,None,None,None,None,None,"Medical Facility (Hospitals, Long-term Care, etc.)"
+2022,Black,None,Muslim,None,None,None,None,Business/Retail
+2018,None,None,Other Christian Religion,None,None,None,None,Public Transportation
+2019,None,None,Christian Orthodox,None,None,None,None,Other Commercial / Corporate Places
+2022,Black,None,Hindu,None,None,None,None,"Apartment Building (Condo, Retirement Buidling, etc.)"
+2019,None,Arab,Other Christian Religion,None,None,None,YES,Religious Place of Worship/Cultural Centre
+2019,East/Southeast Asian,None,Hindu,2SLGBTQ+,None,None,None,Public Transportation
+2023,None,Other Ethnicity not mentioned,Catholic,None,Transgender Man (Identifies As Man),None,None,Non-Commercial/Non for Profit
+2023,None,Chinese,Hindu,None,None,None,None,"Educational Institution (Universities, Colleges, Schools, etc.)"
+2021,"Indigenous, East/Southeast Asian",None,Other Christian Religion,"Lesbian, 2SLGBTQ+",None,None,YES,"House (Townhouse, Retirement Home, Garage, Vehicle, Cottage)"
+2018,Black,Japanese,Other Christian Religion,"Lesbian, 2SLGBTQ+","Transgender, Transgender Woman (Identifies As Woman)",None,YES,"Apartment Building (Condo, Retirement Buidling, etc.)"
+2019,None,None,Hindu,"Lesbian, 2SLGBTQ+",None,None,YES,Business/Retail
+2019,None,None,"Christian Orthodox, Jewish",None,Transgender Woman (Identifies As Woman),None,None,"Medical Facility (Hospitals, Long-term Care, etc.)"
+2021,"East/Southeast Asian, South Asian, Black",Russian,Hindu,None,None,None,None,"Open Area, Park or Parking Lot"
+2022,"Black, White",None,"Jewish, Muslim",None,Woman,None,YES,Business/Retail
+2019,South Asian,None,Catholic,Lesbian,None,None,YES,Non-Commercial/Non for Profit
+2019,None,Indian,Sikh,None,None,None,None,"Apartment Building (Condo, Retirement Buidling, etc.)"
+2022,"Black, South Asian",Japanese,Jewish,None,Woman,None,None,Non-Commercial/Non for Profit
+2020,"White, East/Southeast Asian",Latino,Anglican,None,None,None,None,Business/Retail
+2023,"Indigenous, East/Southeast Asian",Indian,Anglican,"Lesbian, 2SLGBTQ+",None,None,None,"Government Building (Courthouse, Museums, Parliament Building, etc.)"
+2021,Black,None,"Jewish, Muslim",None,None,None,None,Streets/Roadways/Highway
+2023,None,Japanese,Hindu,Gay,Transgender Man (Identifies As Man),None,YES,Other Commercial / Corporate Places
+2022,"Black, East/Southeast Asian",None,"Christian Orthodox, Jewish",Lesbian,None,None,YES,Other Commercial / Corporate Places
+2018,None,None,Other Christian Religion,Lesbian,None,None,None,Government Building
+2018,Black,Latino,Muslim,None,None,None,YES,Non-Commercial/Non for Profit
+2022,"White, East/Southeast Asian",Russian,"Christian Orthodox, Jewish",Gay,None,None,None,"House (Townhouse, Retirement Home, Garage, Vehicle, Cottage)"
+2020,East/Southeast Asian,Korean,"Christian Orthodox, Jewish",Lesbian,None,None,None,Public Transportation
+2023,"East/Southeast Asian, South Asian, Black",Chinese,Anglican,"Lesbian, 2SLGBTQ+",None,None,None,Government Building
+2021,Black,Israeli,Christian Orthodox,None,None,None,None,"Educational Institution (Universities, Colleges, Schools, etc.)"
+2020,None,Israeli,None,None,None,None,None,Religious Place of Worship/Cultural Centre
+2023,Black,None,"Christian Orthodox, Jewish",None,None,None,YES,"Medical Facility (Hospitals, Long-term Care, etc.)"
+2021,None,None,None,None,Woman,None,None,Business/Retail
+2019,None,None,Jewish,None,Woman,None,YES,Streets/Roadways/Highway
+2018,Black,Russian,None,None,None,None,None,Public Transportation
+2018,None,Palestinian,Other Christian Religion,None,None,None,YES,"House (Townhouse, Retirement Home, Garage, Vehicle, Cottage)"
+2018,None,None,Christian Orthodox,Lesbian,None,None,YES,Other Commercial / Corporate Places
+2020,"Black, East/Southeast Asian",None,"Christian Orthodox, Jewish",None,None,None,None,Non-Commercial/Non for Profit
+2018,White,None,Muslim,Gay,None,None,None,NA
+2022,Middle Eastern,None,"Jewish, Muslim",None,Woman,None,None,"Medical Facility (Hospitals, Long-term Care, etc.)"
+2021,Black,Pakistani,"Jewish, Muslim",2SLGBTQ+,None,None,YES,Non-Commercial/Non for Profit
+2023,None,None,Christian Orthodox,"Lesbian, 2SLGBTQ+",None,None,YES,Government Building
+2018,"Black, South Asian",Russian,Muslim,None,None,None,YES,Streets/Roadways/Highway
+2018,None,Japanese,"Jewish, Muslim",2SLGBTQ+,None,None,None,Streets/Roadways/Highway
+2021,None,None,Jewish,2SLGBTQ+,Transgender,None,None,Government Building
+2023,None,None,"Christian Orthodox, Jewish",None,None,None,None,"Educational Institution (Universities, Colleges, Schools, etc.)"
+2021,White,None,Other Christian Religion,None,None,None,None,Business/Retail
+2019,None,Indian,Christian Orthodox,None,None,None,YES,"Apartment Building (Condo, Retirement Buidling, etc.)"
+2019,South Asian,None,Anglican,None,None,None,None,Business/Retail
+2022,Black,None,Muslim,None,Woman,None,None,"Medical Facility (Hospitals, Long-term Care, etc.)"
+2018,Black,None,"Jewish, Muslim",Lesbian,None,None,YES,Religious Place of Worship/Cultural Centre
+2023,None,Chinese,Hindu,None,None,None,None,Other Commercial / Corporate Places
+2018,Black,None,Sikh,Lesbian,None,None,None,NA
+2020,Black,Indian,Christian Orthodox,None,None,None,None,"House (Townhouse, Retirement Home, Garage, Vehicle, Cottage)"
+2023,Black,None,None,"Lesbian, 2SLGBTQ+",Transgender Man (Identifies As Man),None,None,Religious Place of Worship/Cultural Centre
+2022,Black,None,Anglican,None,None,None,None,"Government Building (Courthouse, Museums, Parliament Building, etc.)"
+2020,None,Filipino,None,Gay,None,None,YES,"Educational Institution (Universities, Colleges, Schools, etc.)"
+2018,"Black, East/Southeast Asian",None,Muslim,None,None,None,None,"Open Area, Park or Parking Lot"
+2022,None,None,"Jewish, Muslim",2SLGBTQ+,Transgender Man (Identifies As Man),None,YES,"Apartment Building (Condo, Retirement Buidling, etc.)"
+2023,None,Korean,Anglican,"Lesbian, 2SLGBTQ+",None,None,None,Business/Retail
+2020,None,None,Hindu,Gay,None,None,None,"Medical Facility (Hospitals, Long-term Care, etc.)"
+2019,None,None,Christian Orthodox,"Lesbian, 2SLGBTQ+",None,None,YES,"Open Area, Park or Parking Lot"
+2018,Black,None,"Christian Orthodox, Jewish",None,None,None,None,"House (Townhouse, Retirement Home, Garage, Vehicle, Cottage)"
+2019,None,None,None,None,None,None,None,Business/Retail
+2023,None,Japanese,None,2SLGBTQ+,None,None,None,"Government Building (Courthouse, Museums, Parliament Building, etc.)"
+2018,"East/Southeast Asian, South Asian, Black",None,Other Christian Religion,"Lesbian, 2SLGBTQ+",None,None,YES,NA
+2022,None,None,Catholic,None,None,None,None,Government Building
+2019,None,Korean,Other Christian Religion,None,Transgender Man (Identifies As Man),None,YES,Business/Retail
+2019,None,Mexican,Jewish,None,None,Hindi,YES,"Medical Facility (Hospitals, Long-term Care, etc.)"
+2023,White,African,Hindu,Gay,None,None,None,"Apartment Building (Condo, Retirement Buidling, etc.)"
+2021,None,Indian,Sikh,None,None,None,YES,"Educational Institution (Universities, Colleges, Schools, etc.)"
+2020,None,"Indian, Filipino","Christian Orthodox, Jewish",None,"Transgender, Transgender Woman (Identifies As Woman)",None,None,"Government Building (Courthouse, Museums, Parliament Building, etc.)"
+2023,None,None,Other Christian Religion,None,None,None,YES,"Open Area, Park or Parking Lot"
+2019,None,None,"Jewish, Muslim",None,None,None,None,Business/Retail
+2023,None,None,Jewish,"Lesbian, 2SLGBTQ+",None,None,None,"Educational Institution (Universities, Colleges, Schools, etc.)"
