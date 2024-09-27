@@ -1,10 +1,10 @@
 ---
 title: "Analyzing Patterns of Hate Crimes in Toronto"
-subtitle: "majority of hate crimes are directed toward Jewish "
+subtitle: "The Majority of Hate Crimes Target Jewish Individuals"
 author: 
   - Sakura Hu
-thanks: "https://open.toronto.ca/dataset/hate-crimes-open-data/"
-date: "2024-09-27"
+thanks: "Code and data are available at: https://github.com/xycww/Hate_Crime_In_Toronto"
+date: "27 September 2024"
 date-format: long
 abstract: "This paper explores the issue of hate crimes in Toronto and their underlying causes, highlighting the urgent need for societal awareness and intervention. Utilizing a dataset of hate crime incidents, we employed statistical methods to analyze the counts attributed to various bias categories. Our findings reveal that the majority of hate crimes are directed toward Jewish individuals, with a concerning trend of increasing occurrences over the years. These results underscore the importance of understanding hate crimes to inform policies and initiatives aimed at fostering inclusivity and reducing discrimination in our communities."
 format: pdf
@@ -26,46 +26,41 @@ library(knitr)
 
 # Introduction
 
-Hate crimes are criminal offenses directed at individuals or property, driven by bias, prejudice, or hatred based on factors such as race, ethnicity, language, religion, gender, sexual orientation, disability, or other similar characteristics. These crimes are a serious societal issue, as they target specific groups and reinforce divisions. In recent years, cities like Toronto have witnessed a rise in reported hate crimes, prompting a need to analyze the underlying causes and trends. Understanding the motivations behind hate crimes and identifying the most affected communities is critical for developing targeted prevention strategies and fostering a more inclusive society.
+Hate crimes are criminal offenses directed at individuals or property, driven by bias, prejudice, or hatred based on factors such as race, ethnicity, language, religion, gender, sexual orientation, disability, or other similar characteristics (Toronto Police Service, 2024). These crimes are a serious societal issue, as they target specific groups and reinforce divisions. In recent years, cities like Toronto have witnessed a rise in reported hate crimes, prompting a need to analyze the underlying causes and trends (The Canadian Press, 2024). Understanding the motivations behind hate crimes and identifying the most affected communities is critical for developing targeted prevention strategies and fostering a more inclusive society.
 
-This paper utilizes data on hate crimes reported in Toronto to explore the causes behind these offenses. Specifically, it investigates the most frequent motivations for hate crimes, including race, ethnicity, religion, sexual orientation, and gender identity. By analyzing which demographic groups are most often victimized, this paper aims to shed light on patterns of bias in hate crimes and how these trends have evolved over time. The analysis reveals that Black, Jewish, and female individuals are disproportionately targeted, and the occurrence of hate crimes has been increasing each year.
+This paper employs a dataset of reported hate crimes in Toronto to investigate the patterns and motivations behind these offenses. By analyzing demographic groups that are most frequently victimized, this research aims to uncover trends of bias and discrimination that persist in the community. The findings indicate that Jewish individuals are disproportionately targeted, with a concerning increase in hate crime occurrences each year. This pattern not only reflects existing societal prejudices but also raises alarms about the broader implications for community safety and cohesion.
 
-The importance of this study lies in its ability to inform policymakers, law enforcement, and the public about the prevalence and nature of hate crimes in Toronto. Addressing the root causes of these offenses is essential for reducing their occurrence and protecting vulnerable communities.
+The significance of this study lies in its potential to inform policymakers, law enforcement, and the general public about the prevalence and nature of hate crimes in Toronto. By addressing the root causes of these offenses, stakeholders can implement effective strategies to reduce their occurrence and protect vulnerable communities.
 
-The remainder of this paper is structured as follows: Section 2 discusses the data sources and variables, as well as the process of cleaning and preparing the data for analysis. Section 3 presents the results, including visualizations of key trends, while Section 4 provides a discussion of the findings. Finally, Section 5 includes appendices with additional details and supporting material.
+The remainder of this paper is structured as follows: @sec-data-overview discusses the data sources and variables used in the analysis; @sec-data-analysis presents the results, including visualizations of key trends and a discussion of the findings. @sec-data-cleaning in the appendix outlines the data cleaning process; @sec-reference include a list of reference.
 
 # Data {#sec-data}
-## Data Overview
+## Data Overview {#sec-data-overview}
 
-The dataset for this analysis is sourced from Open Data Toronto, specifically from the Toronto Police Service’s verified Hate Crime occurrences. It records all confirmed hate crimes that have been investigated by the Hate Crime Unit since 2018, categorized by their reported date. Notably, the dataset only includes verified hate crimes and excludes incidents that were unfounded or classified merely as hate incidents.
+The dataset used for this analysis is sourced from Open Data Toronto (Gelfand, 2022), specifically from the Toronto Police Service's verified hate crime occurrences. It records all confirmed hate crimes that have been investigated by the Hate Crime Unit since 2018, categorized by various types of bias. The dataset contains 1,350 observations and 25 variables. It is important to note that only verified hate crimes are included, while unfounded incidents or those classified merely as hate incidents are excluded.
 
-The dataset serves an important societal purpose, providing communities with detailed information to enhance public safety and awareness about hate crimes in Toronto. The data categories, referred to as bias categories, capture various dimensions of prejudice that are present in hate crimes, such as age, mental or physical disability, race, ethnicity, language, religion, sexual orientation, and gender. These categories allow researchers to analyze the prevalence of bias in different forms, offering a structured view of hate crime patterns over time.
+The dataset serves an important societal purpose, providing communities with detailed information to enhance public safety and awareness about hate crimes in Toronto. The data categories, referred to as bias categories, capture various dimensions of prejudice that are present in hate crimes. These categories allow researchers to analyze the prevalence of bias in different forms, offering a structured view of hate crime patterns over time.
 
-This dataset is invaluable for understanding hate crimes within the city, but it also comes with ethical considerations. Since each data point represents a real-world event, we must recognize the harm experienced by individuals and communities due to these crimes. Additionally, it’s important to acknowledge that the dataset focuses on confirmed hate crimes, which means it only represents cases where sufficient evidence was gathered. While this strengthens the reliability of the data, it also limits the scope of the analysis to known and proven crimes. Furthermore, the geographic locations of the incidents are aggregated to the neighborhood level to protect the privacy of the victims and communities involved.
+This dataset is essential for understanding hate crimes within the city, but it also comes with ethical considerations. Each data point represents a real-world event, requiring acknowledgment of the harm experienced by individuals and communities affected by these crimes. Additionally, the dataset only includes confirmed hate crimes, representing cases where sufficient evidence was gathered (Toronto Police Service, 2024). While this enhances the reliability of the data, it also limits the analysis to known and proven crimes. Furthermore, the geographic locations of the incidents are aggregated to the neighborhood level to protect the privacy of the victims and communities involved (Toronto Police Service, 2024).
 
-The data is composed of several key variables relevant to this analysis:
+The dataset was prepared, cleaned, and analyzed using R (R Core Team, 2022) with the following libraries: opendatatoronto (Gelfand, 2022) for accessing the data, tidyverse (Wickham et al., 2019), dplyr (Wickham et al., 2023) for data manipulation, and ggplot2 (Wickham, 2016) for visualizations. Additionally, knitr (Xie, 2023a) was used for report generation, and styler (Müller et al., 2024) ensured the R code was properly styled.
+
+The cleaned data that is used for analysis is composed of 10 variables:
 
 - **EVENT_UNIQUE_ID**: A unique identifier for each offense.
 - **OCCURRENCE_YEAR**: The year in which the offense occurred.
 - **MENTAL_OR_PHYSICAL_DISABILITY**: Whether the offense was based on the suspect’s perception of the victim's mental or physical disability.
-- **RACE_BIAS**: The race of the victim as perceived by the suspect, which was a basis for the hate crime.
-- **ETHNICITY_BIAS**: The ethnicity of the victim as perceived by the suspect, contributing to the hate crime.
-- **LANGUAGE_BIAS**: The language spoken by the victim as perceived by the suspect, used as a bias basis for the crime.
-- **RELIGION_BIAS**: The victim’s religion as perceived by the suspect, which motivated the crime.
-- **SEXUAL_ORIENTATION_BIAS**: The sexual orientation of the victim as perceived by the suspect, serving as a basis for the hate crime.
+- **RACE_BIAS**: The race of the victim as perceived by the suspect.
+- **ETHNICITY_BIAS**: The ethnicity of the victim as perceived by the suspect.
+- **LANGUAGE_BIAS**: The Language spoken by the victim as perceived by the suspect.
+- **RELIGION_BIAS**: The religion of the victim as perceived by the suspect.
+- **SEXUAL_ORIENTATION_BIAS**: The sexual orientation of the victim as perceived by the suspect.
 - **GENDER_BIAS**: The gender of the victim as perceived by the suspect.
-- **LOCATION_TYPE**: Location type of the offence.
+- **LOCATION_TYPE**: The type of location where the crime occurred (e.g., public space, residence).
 
-Alternative datasets were considered but were not used in this analysis. This particular dataset was chosen because it is published by the Toronto Police Service and provides verified, official data on hate crimes, making it more reliable than other possible datasets from unofficial sources. Including additional datasets could introduce inconsistency or unreliability, so this analysis focuses solely on this verified source.
+Alternative datasets were considered but ultimately not used. This dataset, published by the Toronto Police Service, provides verified, official data on hate crimes, making it more reliable than unofficial sources. The official nature of the data strengthens the credibility of the analysis, allowing for a more accurate reflection of hate crime occurrences and bias trends in Toronto.
 
-## Data Cleaning
-The dataset underwent several cleaning steps to ensure its relevance and consistency for analysis. Several variables were removed as they were either irrelevant to the current analysis or did not add value. These included neighborhood-level geographic identifiers (e.g., NEIGHBOURHOOD_140, NEIGHBOURHOOD_158), reporting times and dates (REPORTED_TIME, REPORTED_DATE), and any variables related to the classification or reporting of multiple biases. Specifically, AGE_BIAS was removed because it contained only the constant value “None,” suggesting that hate crimes in this dataset are rarely motivated solely by the victim’s age.
-
-Additionally, the MENTAL_OR_PHYSICAL_DISABILITY variable, which initially used "No" to denote a lack of bias, was modified to use "None" instead to maintain consistency with the other bias columns. No new variables were constructed, but this cleaning process ensured that the dataset was aligned and ready for analysis focused on the key bias categories.
-
-To handle the NAs in the location type column, rows with NAs location type is removed when doing relative analysis, it is not removed when analysis is irrelavant to location type.
-
-## Data Analysis  
+## Data Analysis {#sec-data-analysis}
 
 
 ```{r}
@@ -88,7 +83,9 @@ bias_summary_by_year <- cleaned_data %>%
     sexual_orientation_bias_count = sum(SEXUAL_ORIENTATION_BIAS != "None"),
     disability_bias_count = sum(MENTAL_OR_PHYSICAL_DISABILITY != "None")
   ) %>%
-  mutate(total_by_year = rowSums(across(starts_with("race_bias_count"):starts_with("disability_bias_count"))))
+  mutate(total_by_year = rowSums(across(
+    starts_with("race_bias_count"):starts_with("disability_bias_count")
+  )))
 
 # Convert OCCURRENCE_YEAR to character
 bias_summary_by_year <- bias_summary_by_year %>%
@@ -113,12 +110,20 @@ bias_summary_with_total <- bind_rows(bias_summary_by_year, total_by_category)
 # Display the summary table with totals
 bias_summary_with_total %>%
   kable(
-    col.names = c("Year", "Race", "Ethnicity", "Religion", "Gender", "Sexual Orientation", "Disability", "Total"),
+    col.names = c(
+      "Year",
+      "Race",
+      "Ethnicity",
+      "Religion",
+      "Gender",
+      "Sexual Orientation",
+      "Disability",
+      "Total"
+    ),
     format = "pipe" # Use pipe format for compatibility
   )
-
 ```
-@tbl-summary provides a detailed summary statistic of the cleaned data, illustrating the number of hate crimes committed each year, categorized by specific bias types, along with the total occurrences for each category and the overall total of hate crimes annually. The table indicates that, on average, there are approximately 250 hate crime incidents reported each year in Toronto over the past six years. Notably, incidents motivated by religious bias consistently represent the highest proportion among the various bias types, underscoring a significant area of concern for community safety and policy interventions. This data highlights not only the prevalence of hate crimes but also the specific biases that warrant focused attention and resources for prevention and support initiatives.
+@tbl-summary provides a detailed summary statistic of the cleaned data, illustrating the number of hate crimes committed each year, categorized by specific bias types, along with the total occurrences for each category and the overall total of hate crimes annually. The table indicates that, on average, there are approximately 250 hate crime incidents reported each year in Toronto over the past six years. Notably, incidents motivated by religious bias consistently represent the highest proportion among the various bias types, underscoring a significant area of concern for community safety and policy interventions.
 
 ```{r}
 #| label: fig-yearly-occurrence
@@ -131,16 +136,18 @@ year_counts <- cleaned_data %>%
 
 # Create the bar chart
 ggplot(year_counts, aes(x = as.factor(OCCURRENCE_YEAR), y = n)) +
-  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
+  geom_bar(stat = "identity",
+           fill = "steelblue",
+           alpha = 0.8) +
   theme_minimal() +
   labs(x = "Year of Occurrence", y = "Number of Occurrences") +
   scale_x_discrete(drop = FALSE) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-@fig-yearly-occurrence illustrates the annual occurrences of hate crimes from 2018 to 2023. The data indicates a clear upward trend in the number of reported hate crimes over this period. Starting from approximately 154 occurrences in 2018, there is a steady increase each year, culminating in a significant rise to over 392 occurrences in 2023.
+@fig-yearly-occurrence illustrates the annual occurrences of hate crimes from 2018 to 2023. The data indicates a clear upward trend in the number of reported hate crimes over this period. Starting from approximately 154 occurrences in 2018, there is a steady increase each year, culminating in a significant rise to over 394 occurrences in 2023.
 
-This trend may suggest a growing prevalence of hate crimes within the community, possibly influenced by various social, political, and economic factors. Additionally, it could reflect an increase in public awareness and reporting of such incidents, as societal attitudes toward hate crimes continue to evolve. This increase raises important questions about the underlying causes and necessitates further investigation into the factors contributing to the rise in these offenses.
+This trend may suggest a growing prevalence of hate crimes within the Toronto, possibly influenced by various social, political, and economic factors. Additionally, it could reflect an increase in public awareness and reporting of such incidents, as societal attitudes toward hate crimes continue to evolve. This increase raises important questions about the underlying causes and necessitates further investigation into the factors contributing to the rise in these offenses.
 
 Overall, the increasing trend in hate crime occurrences highlights the importance of ongoing efforts in awareness, prevention, and intervention strategies to address the root causes of hate-driven behavior in society.
 
@@ -153,27 +160,43 @@ Overall, the increasing trend in hate crime occurrences highlights the importanc
 
 # Reshape the data to long format and count occurrences for each bias
 bias_counts <- cleaned_data %>%
-  select(RACE_BIAS, ETHNICITY_BIAS, SEXUAL_ORIENTATION_BIAS, GENDER_BIAS, LANGUAGE_BIAS, RELIGION_BIAS, MENTAL_OR_PHYSICAL_DISABILITY) %>%
-  pivot_longer(cols = everything(), names_to = "Bias_Type", values_to = "Bias_Value") %>%
+  select(
+    RACE_BIAS,
+    ETHNICITY_BIAS,
+    SEXUAL_ORIENTATION_BIAS,
+    GENDER_BIAS,
+    LANGUAGE_BIAS,
+    RELIGION_BIAS,
+    MENTAL_OR_PHYSICAL_DISABILITY
+  ) %>%
+  pivot_longer(cols = everything(),
+               names_to = "Bias_Type",
+               values_to = "Bias_Value") %>%
   mutate(Value = ifelse(Bias_Value == "None", 0, 1)) %>%
   group_by(Bias_Type) %>%
   summarise(Count = sum(Value))
 
 # Modify Bias_Type for better readability
 bias_counts <- bias_counts %>%
-  mutate(Bias_Type = case_when(
-    Bias_Type == "RACE_BIAS" ~ "Race",
-    Bias_Type == "ETHNICITY_BIAS" ~ "Ethnicity",
-    Bias_Type == "SEXUAL_ORIENTATION_BIAS" ~ "Sexual Orientation",
-    Bias_Type == "GENDER_BIAS" ~ "Gender",
-    Bias_Type == "LANGUAGE_BIAS" ~ "Language",
-    Bias_Type == "RELIGION_BIAS" ~ "Religion",
-    Bias_Type == "MENTAL_OR_PHYSICAL_DISABILITY" ~ "Disability",
-    TRUE ~ Bias_Type
-  ))
+  mutate(
+    Bias_Type = case_when(
+      Bias_Type == "RACE_BIAS" ~ "Race",
+      Bias_Type == "ETHNICITY_BIAS" ~ "Ethnicity",
+      Bias_Type == "SEXUAL_ORIENTATION_BIAS" ~ "Sexual Orientation",
+      Bias_Type == "GENDER_BIAS" ~ "Gender",
+      Bias_Type == "LANGUAGE_BIAS" ~ "Language",
+      Bias_Type == "RELIGION_BIAS" ~ "Religion",
+      Bias_Type == "MENTAL_OR_PHYSICAL_DISABILITY" ~ "Disability",
+      TRUE ~ Bias_Type
+    )
+  )
 
 # Create a bar chart
-ggplot(bias_counts, aes(x = reorder(Bias_Type, Count), y = Count, fill = Bias_Type)) +
+ggplot(bias_counts, aes(
+  x = reorder(Bias_Type, Count),
+  y = Count,
+  fill = Bias_Type
+)) +
   geom_bar(stat = "identity") +
   theme_minimal() +
   labs(x = "Bias Type", y = "Count of Occurrences") +
@@ -181,9 +204,9 @@ ggplot(bias_counts, aes(x = reorder(Bias_Type, Count), y = Count, fill = Bias_Ty
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-@fig-occurrence-by-bias presents the total occurrences of hate crimes over the past six years, categorized by the type of bias involved. The data reveals that hate crimes motivated by ethnicity bias are the most frequently reported, underscoring significant concerns for ethnically targeted offenses within the community. In contrast, hate crimes related to disability bias are notably underreported.
+@fig-occurrence-by-bias presents the total occurrences of hate crimes over the past six years, categorized by the type of bias involved. The data reveals that hate crimes motivated by ethnicity bias are the most frequently reported, underscoring significant concerns for ethnically targeted offenses within the community. In contrast, hate crimes related to disability bias are notably under-reported.
 
-This discrepancy may not solely reflect the actual prevalence of such crimes; rather, it also highlights potential biases in measurement and reporting. While hate crimes based on ethnicity can often manifest as attacks on community spaces, disabled individuals frequently experience isolation, lacking the community structures that might support them in reporting incidents. This isolation can lead to underreporting of hate crimes, as many victims may not feel a sense of community or empowerment to come forward. Additionally, the unique barriers faced by individuals with disabilities, including fear of stigma and difficulties accessing reporting mechanisms, compound this issue.
+This discrepancy may not solely reflect the actual prevalence of such crimes; rather, it also highlights potential biases in measurement and reporting. While hate crimes based on ethnicity can often manifest as attacks on community spaces, disabled individuals frequently experience isolation, lacking the community structures that might support them in reporting incidents (Healy, 2015). This isolation can lead to under-reporting of hate crimes, as many victims may not feel a sense of community or empowerment to come forward (Healy, 2015). Additionally, the unique barriers faced by individuals with disabilities, including fear of stigma and difficulties accessing reporting mechanisms, compound this issue (Healy, 2015).
 
 Additionally, the low reporting of hate crimes motivated by language bias also highlights potential biases in measurement and reporting. Many people may associate language with ethnicity, leading them to prioritize ethnicity over language in their perceptions of hate crimes. This tendency can obscure the realities faced by victims of language bias, further complicating the understanding of hate crime dynamics.
 
@@ -199,7 +222,9 @@ religion_bias_counts <- cleaned_data %>%
 
 # Create the bar chart
 ggplot(religion_bias_counts, aes(x = reorder(RELIGION_BIAS, n), y = n)) +
-  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
+  geom_bar(stat = "identity",
+           fill = "steelblue",
+           alpha = 0.8) +
   theme_minimal() +
   labs(x = "Religion Bias Categories", y = "Number of Occurrences") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
@@ -227,21 +252,31 @@ year_religion_counts <- year_religion_counts %>%
   mutate(percentage = n / sum(n) * 100)
 
 # Create the stacked bar chart
-ggplot(year_religion_counts, aes(x = as.factor(OCCURRENCE_YEAR), y = percentage, fill = RELIGION_CATEGORY)) +
-  geom_bar(stat = "identity", position = "stack", alpha = 0.8) +
+ggplot(year_religion_counts,
+       aes(
+         x = as.factor(OCCURRENCE_YEAR),
+         y = percentage,
+         fill = RELIGION_CATEGORY
+       )) +
+  geom_bar(stat = "identity",
+           position = "stack",
+           alpha = 0.8) +
   scale_fill_manual(values = c("Jewish" = "steelblue", "Other" = "orange")) +
   theme_minimal() +
   labs(x = "Year of Occurrence", y = "Number of Occurrences") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  geom_text(aes(label = scales::percent(percentage / 100)), 
-            position = position_stack(vjust = 0.5), 
-            color = "white", size = 4)  # Adjust size and color as needed
+  geom_text(
+    aes(label = scales::percent(percentage / 100)),
+    position = position_stack(vjust = 0.5),
+    color = "white",
+    size = 3
+  ) 
 ```
 @fig-Jewish-bias displays the percentage of hate crimes targeting Jewish individuals compared to other religious groups since 2018. The data reveals fluctuations in the proportion of hate crimes directed toward Jewish people. Specifically, the percentage has varied, with notable increases in certain years—rising from 70% in 2018 to 83% in 2022, followed by a slight decline to 78% in 2023. While this does not indicate a steady increase, it highlights consistent high levels of hate crimes against Jewish individuals, with occasional variations across the years. This trend suggests a sustained and significant targeting of the Jewish community.
 
 ```{r}
 #| label: fig-jewish-offence-location
-#| fig-cap: "Occurrences of Hate Crimes by Primary Offence for Jewish Bias"
+#| fig-cap: "Distribution of Hate Crimes Against Jewish Individuals by Location Type"
 #| echo: false
 
 # Filter out offenses for "Jewish" from the RELIGION_BIAS column and count occurrences
@@ -252,26 +287,28 @@ jewish_offence_counts <- cleaned_data %>%
 
 # Create a named vector with the old and new labels
 location_labels <- c(
-  "Apartment Building (Condo, Retirement Buidling, etc.)" = "Apartment Building", 
-  "Business/Retail" = "Business/Retail", 
-  "Educational Institution (Universities, Colleges, Schools, etc.)" = "Educational Institution", 
-  "Government Building" = "Government Facility", 
-  "Government Building (Courthouse, Museums, Parliament Building, etc.)" = "Government Building", 
-  "House (Townhouse, Retirement Home, Garage, Vehicle, Cottage)" = "House", 
-  "Medical Facility (Hospitals, Long-term Care, etc.)" = "Medical Facility", 
-  "Non-Commercial/Non for Profit" = "Non-Commercial", 
-  "Open Area, Park or Parking Lot" = "Open Area", 
-  "Other Commercial / Corporate Places" = "Corporate Places", 
-  "Public Transportation" = "Public Transportation", 
-  "Religious Place of Worship/Cultural Centre" = "Religious Place of Worship/Cultural Centre", 
-  "Streets/Roadways/Highway" = "Streets/Roadways/Highway" 
+  "Apartment Building (Condo, Retirement Buidling, etc.)" = "Apartment Building",
+  "Business/Retail" = "Business/Retail",
+  "Educational Institution (Universities, Colleges, Schools, etc.)" = "Educational Institution",
+  "Government Building" = "Government Facility",
+  "Government Building (Courthouse, Museums, Parliament Building, etc.)" = "Government Building",
+  "House (Townhouse, Retirement Home, Garage, Vehicle, Cottage)" = "House",
+  "Medical Facility (Hospitals, Long-term Care, etc.)" = "Medical Facility",
+  "Non-Commercial/Non for Profit" = "Non-Commercial",
+  "Open Area, Park or Parking Lot" = "Open Area",
+  "Other Commercial / Corporate Places" = "Corporate Places",
+  "Public Transportation" = "Public Transportation",
+  "Religious Place of Worship/Cultural Centre" = "Religious Place of Worship/Cultural Centre",
+  "Streets/Roadways/Highway" = "Streets/Roadways/Highway"
   
   # Add more mappings here as needed
 )
 
 # Create the bar chart with renamed x-axis labels
 ggplot(jewish_offence_counts, aes(x = reorder(LOCATION_TYPE, n), y = n)) +
-  geom_bar(stat = "identity", fill = "steelblue", alpha = 0.8) +
+  geom_bar(stat = "identity",
+           fill = "steelblue",
+           alpha = 0.8) +
   theme_minimal() +
   labs(x = "Location Type", y = "Number of Occurrences") +  # Rename x-axis label
   scale_x_discrete(labels = location_labels) +  # Rename the x-axis categories
@@ -286,43 +323,39 @@ In contrast, hate crimes reported at cultural centers are considerably less freq
 The stark difference between the frequency of hate crimes in schools compared to cultural centers prompts critical questions regarding the factors that contribute to these disparities. Understanding the dynamics of these environments can guide targeted initiatives aimed at enhancing safety and raising awareness in high-risk areas, particularly schools, where Jewish individuals face heightened risks of victimization.
 
 
-# Results
-
-Our results are summarized in @tbl-modelresults.
-
-
-
-
-
-
-# Discussion
-
-## First discussion point {#sec-first-point}
-
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
-
-## Second discussion point
-
-## Third discussion point
-
-## Weaknesses and next steps
-
-Weaknesses and next steps should also be included.
-
-\newpage
-
-\appendix
-
 # Appendix {-}
 
 
+# Additional data details
 
+## Data Cleaning {#sec-data-cleaning}
+The dataset underwent a series of cleaning steps to ensure its relevance and consistency for analysis. Several variables were removed due to their irrelevance to the current study. Notably, the AGE_BIAS variable was eliminated because it contained only the constant value “None,” suggesting that hate crimes are rarely motivated solely by the victim’s age.
 
+Additionally, the MENTAL_OR_PHYSICAL_DISABILITY variable was updated to replace "No" with "None" to maintain consistency with the other bias categories. While no new variables were created, these cleaning processes ensured that the dataset was aligned and prepared for an analysis focused on the primary bias categories.
+
+To handle missing values in the location type column, rows with NAs in this variable were removed for analyses specifically related to location type. However, these rows were retained for analyses that did not pertain to location type, allowing for a more comprehensive examination of the data.
 
 
 \newpage
 
 
-# References
+# References{#sec-reference}
+R Core Team. (2023). R: A language and environment for statistical computing. R Foundation for Statistical Computing. https://www.R-project.org/
+
+Gelfand, D. (2022). opendatatoronto: Access Open Data Toronto Datasets (R package version). https://CRAN.R-project.org/package=opendatatoronto
+
+Wickham, H., Averick, M., Bryan, J., Chang, W., D'Agostino McGowan, L., François, R., Grolemund, G., Hayes, A., Henry, L., Hester, J., Kuhn, M., Pedersen, T. L., Miller, E., Bache, S. M., Müller, K., Ooms, J., Robinson, D., Seidel, D., Spinu, V., Vaughan, K., Wilke, C., Takahashi, K., & Dunnington, D. (2019). Welcome to the tidyverse (R package version). https://CRAN.R-project.org/package=tidyverse
+
+Wickham, H., François, R., Henry, L., & Müller, K. (2023). dplyr: A grammar of data manipulation (R package version 1.1.2). https://CRAN.R-project.org/package=dplyr
+
+Wickham, H. (2016). ggplot2: Elegant graphics for data analysis. Springer-Verlag New York. https://ggplot2.tidyverse.org
+
+Xie, Y. (2022). knitr: A general-purpose package for dynamic report generation in R (R package version 1.40). https://yihui.org/knitr/
+
+Müller, K., Walthert, L., & Patil, I. (2022). styler: Non-invasive pretty printing of R code (R package version 1.40). https://CRAN.R-project.org/package=styler
+
+Healy, J. (2015). Why don’t we recognise Disability Hate Crime? International Network for Hate Studies. https://internationalhatestudies.com/dont-recognise-disability-hate-crime/
+
+The Canadian Press. (2024). Hate crimes in Toronto up nearly 55% over last year: Police. CBC News. https://www.cbc.ca/news/canada/toronto/toronto-hate-crime-stats-1.7245301
 
 

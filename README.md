@@ -18,9 +18,4 @@ The repo is structured as:
 
 ## Statement on LLM usage
 
-Aspects of the code were written with the help of the auto-complete tool, ChatGPT. The abstract and introduction were written with the help of ChatGPT and the entire chat history is available in inputs/llms/usage.txt.
-
-## Some checks
-
-- [ ] Change the rproj file name so that it's not starter_folder.Rproj
-- [ ] Remove this checklist
+Aspects of the code were written with the help of the auto-complete tool, ChatGPT. The abstract, introduction, and data analysis were written with the help of ChatGPT and the entire chat history is available in inputs/llms/usage.txt.
