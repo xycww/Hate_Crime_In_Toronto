@@ -6,7 +6,7 @@ author:
 thanks: "Code and data are available at: https://github.com/xycww/Hate_Crime_In_Toronto"
 date: "27 September 2024"
 date-format: long
-abstract: "This paper explores the issue of hate crimes in Toronto and their underlying causes, highlighting the urgent need for societal awareness and intervention. Utilizing a dataset of hate crime incidents, we employed statistical methods to analyze the counts attributed to various bias categories. Our findings reveal that the majority of hate crimes are directed toward Jewish individuals, with a concerning trend of increasing occurrences over the years. These results underscore the importance of understanding hate crimes to inform policies and initiatives aimed at fostering inclusivity and reducing discrimination in our communities."
+abstract: "TThis paper explores the issue of hate crimes in Toronto and their underlying causes, highlighting the urgent need for societal awareness and intervention. Utilizing a dataset of hate crime incidents, we employed statistical methods to analyze the counts attributed to various bias categories. Our findings reveal that the majority of hate crimes are directed toward Jewish individuals, with a concerning trend of increasing occurrences over the years. These results underscore the importance of understanding hate crimes to inform policies and initiatives aimed at fostering inclusivity and reducing discrimination in our communities."
 format: pdf
 number-sections: true
 bibliography: references.bib
